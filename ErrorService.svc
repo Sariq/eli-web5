@@ -1,0 +1,2 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ErrorService" CodeBehind="~/App_Code/Error/ErrorService.cs"
+    Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>

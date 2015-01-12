@@ -1,0 +1,108 @@
+<h1 class="page-header" translate>Add Meeting</h1>
+<ol class="breadcrumb">
+    <li><a href="#" translate>Admin</a></li>
+    <li><a href="#/meetings" translate>Meeting</a></li>
+    <li class="active" translate>Add Meeting</li>
+</ol>
+
+<div ng-if="add.error" class="alert alert-danger" role="alert">{{ add.error }}</div>
+<div ng-if="add.debug" class="alert alert-warning" role="alert">{{ add.debug }}</div>
+
+
+
+<div class="well">
+    <div class="well">
+
+        <form name="myForm" class="form-horizontal" role="form" novalidate>
+
+
+            <div ng-class="{'has-error':!add.meeting.ip_title}" class="form-group ">
+                <label for="first_name" class="col-sm-2 control-label">therapistId</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="therapistId" ng-model="add.meeting.therapistId"
+                           id="therapistId"
+                           placeholder="therapistId" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Last Name</label>
+
+                <div class="col-sm-10">
+                    <input type="text" ng-model="add.meeting.patientId" class="form-control" id="patientId"
+                           placeholder="patientId" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">title</label>
+
+                <div class="col-sm-10">
+                    <input type="text" ng-model="add.meeting.title" class="form-control" id="title"
+                           placeholder="title" required>
+                </div>
+            </div>
+              <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">adress</label>
+
+                <div class="col-sm-10">
+                    <input type="text" ng-model="add.meeting.adress" class="form-control" id="adress"
+                           placeholder="adress" required>
+                </div>
+            </div>
+             
+              <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">note</label>
+
+                <div class="col-sm-10">
+                    <input type="text" ng-model="add.meeting.note" class="form-control" id="note"
+                           placeholder="note" required>
+                </div>
+            </div>
+<!--<label>Due Date :</label><br>
+		<datetimepicker ng-change="validatmpeventDuedate()" min-date="minDate"
+			show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep"
+			ng-model="event.tmpeventDuedate" show-meridian="showMeridian"
+			date-format="dd-MMM-yyyy" date-options="dateOptions"
+			date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+		<br>-->
+           
+
+ 
+   <!--       <button class="btn btn-info" ng-click="add.addMeeting(add.meeting)" translate>Add meeting</button>
+
+            <table class="table">
+                <tr>
+                    <td translate>Project Family</td>
+                    <td translate>Project</td>
+                    <td translate>Step</td>
+                </tr>
+
+
+                <tr ng-repeat="meeting in add.meeting.meetings" pf-directive meeting="add.meeting.meetings" >
+                      <td><input ng-model="service.comments"></td>
+                     <td><input ng-model="service.comments"></td>
+                     <td><input ng-model="service.comments"></td>
+                    </tr>
+
+
+            </table>-->
+
+
+
+
+              <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <div class="col-sm-10">
+                    <div class="btn-group col-sm-10">
+                        <button ng-disabled="!add.meeting.title" style="width: 50%;" ng-click="add.save();"
+                                class="btn btn-info"
+                                translate>Save
+                        </button>
+                        <a style="width: 50%;" href="#/meetings" class="btn btn-warning">Cancel</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
