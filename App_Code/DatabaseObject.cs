@@ -5,7 +5,8 @@ using System.Runtime.Serialization;
 [DataContract]
 public class DatabaseObject
 {
-    public String _id;
+    [DataMember]
+    public string _id { get; set; }
 
     public DatabaseObject()
     {

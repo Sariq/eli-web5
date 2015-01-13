@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 [DataContract]
 public class Meeting : DatabaseObject
 {
-
     [DataMember]
     public string therapistId { get; set; }
     [DataMember]
@@ -32,6 +31,7 @@ public class Meeting : DatabaseObject
 
     public Meeting(Meeting meeting)
     {
+        this._id = meeting._id;
         this.therapistId = meeting.therapistId;
         this.patientId = meeting.patientId;
         this.title = meeting.title;
