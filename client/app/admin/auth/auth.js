@@ -30,4 +30,3 @@
 //  angular.module('eli.admin')
 //    .controller('LogInCtrl', ['AuthService',LogInCtrl]);
 //}());
-//saritest
