@@ -4,8 +4,9 @@
     console.log(MeetingAdmin);
     self.meetings = MeetingAdmin.listMeetings();
                         
-  
- 
+    self.op1 = false;
+    self.op2 = true;
+    self.op3 = false;
      self.remove = function (meeting) {
         console.log(meeting);
         console.log(meeting._id);

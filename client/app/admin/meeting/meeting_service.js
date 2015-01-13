@@ -12,8 +12,9 @@
       {update: {method: 'PUT'}}
     );
 
-    self.get = function(meeting_id){
-      return self.meetingResource.get({_id:meeting_id });
+    self.get = function (meeting_id) {
+      
+      return self.meetingResource.get({id:meeting_id });
     };
 
     self.save = function (meeting) {

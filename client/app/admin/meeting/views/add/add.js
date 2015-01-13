@@ -27,7 +27,8 @@
         };
 
         if (self.meetingId) {
-            self.meeting = MeetingAdmin.get($stateParams.meetingId);
+         
+            self.meeting = MeetingAdmin.get(self.meetingId);
             //self.meeting.$promise.then(function (result) {
             //});
 
@@ -65,12 +66,12 @@
             } else {
                 self.meeting.$update(function (response) {
                     console.log(response);
-                    if (response.status == 0) {
+                    //if (response.status == 0) {
                         $location.path(success_url);
-                    } else {
-                        self.error = response.error;
-                        self.debug = response.debug;
-                    }
+                    //} else {
+                    //    self.error = response.error;
+                    //    self.debug = response.debug;
+                    //}
                 });
             }
         };
