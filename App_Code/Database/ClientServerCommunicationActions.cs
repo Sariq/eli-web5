@@ -12,10 +12,10 @@ using System.Text;
 
 public class ClientServerCommunicationActions
 {
-    public void SetTokenToHeader(Employee employee)
+    public void SetTokenToHeader(User user)
     {
         var response = HttpContext.Current.Response;
-        var token = new Token(employee);
+        var token = new Token(user);
         response.Headers.Add("id_token", JWT.JsonWebToken.Encode(token, "elile", JwtHashAlgorithm.HS256));
     }
 

@@ -20,12 +20,12 @@ public class Token
         _jti = Guid.NewGuid().ToString("N");
     }
 
-    public Token(Employee employee)
+    public Token(User user)
     {
         DateTime now = DateTime.UtcNow;
 
-        _id = employee._id;
-        if (employee._isRememberMe)
+        _id = user._id;
+        if (user.isRememberMe)
             exp = GetTimestamp(now.AddHours(12));
         else { exp = GetTimestamp(now.AddHours(12)); }
         _jti = Guid.NewGuid().ToString("N");

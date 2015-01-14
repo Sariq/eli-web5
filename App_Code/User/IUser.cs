@@ -2,7 +2,7 @@
 using System.ServiceModel.Web;
 
 [ServiceContract]
-public interface IEmployee
+public interface IUser
 {
     [OperationContract]
     [WebInvoke(
@@ -11,7 +11,7 @@ public interface IEmployee
         BodyStyle = WebMessageBodyStyle.Bare,
         UriTemplate = "SignIn")
     ]
-    Employee SignIn(Employee employee);
+    User SignIn(User user);
 
     [OperationContract]
     [WebInvoke(
@@ -27,37 +27,36 @@ public interface IEmployee
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "GetEmployee")
+         UriTemplate = "GetUser")
     ]
-    Employee GetEmployee();
+    User GetUser();
 
     [OperationContract]
     [WebInvoke(
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "AddEmployee")
+         UriTemplate = "AddUser")
     ]
-    void AddEmployee(Employee employee);
+    void AddUser(User user);
 
     [OperationContract]
     [WebInvoke(
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "RemoveEmployee")
+         UriTemplate = "RemoveUser")
     ]
-    void RemoveEmployee(Employee employee);
+    void RemoveUser(User user);
 
     [OperationContract]
     [WebInvoke(
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "UpdateEmployee")
+         UriTemplate = "UpdateUser")
     ]
-    void UpdateEmployee(Employee employee);
-
+    void UpdateUser(User user);
 
 
     //[OperationContract]
@@ -67,5 +66,5 @@ public interface IEmployee
     //    BodyStyle = WebMessageBodyStyle.Bare,
     //    UriTemplate = "EmployeeList")
     //]
-    //List<Employee> EmployeeList(Employee employee);  
+    //List<User> EmployeeList(User user);  
 }

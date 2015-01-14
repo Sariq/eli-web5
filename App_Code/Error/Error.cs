@@ -3,6 +3,7 @@
 [DataContract]
 public class Error : DatabaseObject
 {
+
     public enum ErrorType
     {
         PasswordIsIncorrect,
@@ -10,17 +11,24 @@ public class Error : DatabaseObject
         UserIsAlreadyExist,
         NoUserInHeader,
         UserInHeaderIsNotExist,
-        ErrorIsNotExist,
+
         MeetingIsNotExist,
-        MeetingIsAlreadyExist
+        MeetingIsAlreadyExist,
+
+        PatientIsNotExist,
+        PatientIsAlreadyExist,
+
+        AssignmentIsNotExist,
+        AssignmentIsAlreadyExist,
     }
 
-    [DataMember] public string _errorDescription { get; set; }
+    [DataMember] 
+    public string error_description { get; set; }
 
 
     public Error(ErrorType errorType) : base()
     {
-        _errorDescription = errorType.ToString();
+        error_description = errorType.ToString();
     }
 
 }

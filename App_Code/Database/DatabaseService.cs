@@ -1,43 +1,78 @@
 ﻿using MongoDB.Driver;
 using MongoDB.Driver.Builders;
+using System;
 
 public class DatabaseService : IDatabaseService
 {
+
     public void Initialize()
     {
-        CreateCollection("Employee");
-        SetCollectionPrimeryKey("Employee", "_userId");
+        CreateCollection("User");
+        SetCollectionPrimeryKey("User", "userId");
 
-        CreateCollection("Error");
-        SetCollectionPrimeryKey("Error", "_errorDescription");
+        CreateCollection("Meeting");
 
-        InitializeEmployeeCollection();
-        InitializeErrorCollection();
+        //CreateCollection("Assignment");
+
+        //CreateCollection("Patient");
+        //SetCollectionPrimeryKey("Patient", "identityNumber");
+
+        InitializeUserCollection();
+        //InitializePatientCollection();
+        InitializeMeetingCollection();
+        //InitializeAssignmentCollection();
     }
 
-    private void InitializeErrorCollection()
+
+    //private void InitializeAssignmentCollection()
+    //{
+    //    var assignmentService = new AssignmentService();
+
+    //    var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
+
+    //    var assignment = new Assignment(user, "AssignmentA", "freeText", false);
+    //    assignmentService.AddAssignment(assignment);
+
+    //    assignment = new Assignment(user, "AssignmentB", "freeText", false);
+    //    assignmentService.AddAssignment(assignment);
+    //}
+
+    //private void InitializePatientCollection()
+    //{
+    //    var patientService = new PatientService();
+
+    //    var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
+
+    //    var assignment = new Assignment(user, "AssignmentA", "freeText", false);
+    //    Assignment[] assignments = new Assignment[] { assignment };
+
+    //    var patient = new Patient("123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, assignments);
+    //    patientService.AddPatient(patient);
+
+    //    patient = new Patient("1233", "Sari", "Q", "sari@gmail.com", "K", DateTime.Today, assignments);
+    //    patientService.AddPatient(patient);
+    //}
+
+    private void InitializeUserCollection()
     {
-        var errorService = new ErrorService();
+        var userService = new UserService();
 
-        var error = Error.ErrorType.PasswordIsIncorrect;
-        errorService.AddError(error);
+        var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
+        userService.AddUser(user);
 
-        error = Error.ErrorType.UserIsNotExist;
-        errorService.AddError(error);
-
-        error = Error.ErrorType.UserIsAlreadyExist;
-        errorService.AddError(error);
+        user = new User("Sari", "123", "Sari", "Q", "sari@gmail.com", "K", DateTime.Today, "role", false);
+        userService.AddUser(user);
     }
 
-    private void InitializeEmployeeCollection()
+    private void InitializeMeetingCollection()
     {
-        var employeeService = new EmployeeService();
+        var meetingService = new MeetingService();
 
-        var employee = new Employee("Karin", "123", "Karin", "B", "karin@gmail.com", true, true);
-        employeeService.AddEmployee(employee);
+        var meeting = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "freeText");
+        meetingService.AddMeeting(meeting);
 
-        employee = new Employee("Sari", "123", "Sari", "Q", "sari@gmail.com", true, true);
-        employeeService.AddEmployee(employee);
+        meeting = new Meeting("123", "123", "meetingB", "K", DateTime.Today, "freeText");
+        meetingService.AddMeeting(meeting);
     }
 
     private MongoDatabase GetDatabase()
