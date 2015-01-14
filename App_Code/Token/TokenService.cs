@@ -16,7 +16,7 @@ public class TokenService : DatabaseActions, IToken
      
         try
         {
-            var obj = GetObject<Employee>(id, "Employee");
+            var obj = GetObject<User>(id, "User");
         }
         catch
         {
@@ -31,11 +31,11 @@ public class TokenService : DatabaseActions, IToken
     }
 
 
-    public Employee SignIn(Employee employee)
+    public User SignIn(User user)
     {
 
 
-        return employee;
+        return user;
     }
 
 }

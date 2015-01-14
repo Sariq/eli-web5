@@ -3,17 +3,12 @@
     function AuthService($resource, $http, localStorageService, jwtHelper, ipCookie) {
                                                
 
-        var user = {
-            _userId: 'Sari',
-            _password: '123',
-            _isRememberMe: false
-        };
 
         var self = this;
         var count = 0;
         self.userInfo = {};
         self.count = 1;
-        self.authResource = $resource('/EmployeeService.svc/SignIn/:id', {}, [{ update: { method: 'PUT' } }]);
+        self.authResource = $resource('/UserService.svc/SignIn/:id', {}, [{ update: { method: 'PUT' } }]);
         //self.tokenRefreshResource = $resource('http://localhost:83\:83/TokenService.svc/RefreshToken/:id', {}, { update: { method: 'PUT' } });
         self.getTokenId = function () {
             if (localStorageService.cookie.get('id_token') != null) {
@@ -55,9 +50,9 @@
         };
         self.create = function () {
             var user = {
-                _userId: '',
-                _password: '',
-                _isRememberMe: false
+                userId: '',
+                password: ''
+               
             };
             return new self.authResource(user);
         };

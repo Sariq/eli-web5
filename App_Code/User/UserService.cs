@@ -1,48 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
 using System.Net;
 using System.ServiceModel.Web;
 using System.Web;
-using JWT;
-using System.Diagnostics;
-using System.Threading;
-using System.Web;
 
 
-public class EmployeeService : DatabaseActions, IEmployee
+public class UserService : DatabaseActions, IUser
 {
     ClientServerCommunicationActions communication = new ClientServerCommunicationActions();
 
-    public Employee SignIn(Employee employee)
+    public User SignIn(User user)
     {
-        var dbEmployee = GetEmployee(employee);
+        var dbUser = GetUser(user);
 
-        if (dbEmployee == null)
+        if (dbUser == null)
         {
             var error = new Error(Error.ErrorType.UserIsNotExist);
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
 
-        if (employee._password != dbEmployee._password)
+        if (user.password != dbUser.password)
         {
             var error = new Error(Error.ErrorType.PasswordIsIncorrect);
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
 
-        if (employee._isRememberMe)
+        if (user.isRememberMe)
         {
-            dbEmployee._isRememberMe = true;
-            UpdateEmployee(dbEmployee);
+            dbUser.isRememberMe = true;
+            UpdateUser(dbUser);
         }
         else
         {
-            dbEmployee._isRememberMe = false;
-            UpdateEmployee(dbEmployee);
+            dbUser.isRememberMe = false;
+            UpdateUser(dbUser);
         }
 
-        communication.SetTokenToHeader(dbEmployee);
+        communication.SetTokenToHeader(dbUser);
 
         //// Example
         //var token2 = new ClientServerCommunicationActions().GetTokenFromHeader();
@@ -50,7 +44,7 @@ public class EmployeeService : DatabaseActions, IEmployee
         //new ClientServerCommunicationActions().SetTokenToHeader_AllDetails_OnlyForExample(token2);
         //// End Example
 
-        return dbEmployee;
+        return dbUser;
     }
 
     public void SignOut()
@@ -63,9 +57,9 @@ public class EmployeeService : DatabaseActions, IEmployee
         }
     }
 
-    public Employee GetEmployee()
+    public User GetUser()
     {
-        Employee employee;
+        User user;
         try
         {
             new ClientServerCommunicationActions().GetTokenFromHeader();
@@ -80,7 +74,7 @@ public class EmployeeService : DatabaseActions, IEmployee
 
         try
         {
-            employee = GetObject<Employee>(tokenId, "Employee").Result;
+            user = GetObject<User>(tokenId, "User").Result;
         }
         catch
         {
@@ -88,14 +82,41 @@ public class EmployeeService : DatabaseActions, IEmployee
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
 
-        return employee;
+        return user;
     }
 
-    public void AddEmployee(Employee employee)
+    public User GetUser(User user)
     {
-        var dbEmployee = GetEmployee(employee);
-        if (dbEmployee == null)
-            InsertObject(employee, "Employee");
+        try
+        {
+            return GetObject<User>("userId", user.userId, "User").Result;
+
+        }
+        catch
+        {
+            var error = new Error(Error.ErrorType.UserIsNotExist);
+            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
+        }
+    }
+
+    public User GetUser(string userId)
+    {
+        try
+        {
+            return GetObject<User>(userId, "User").Result;
+        }
+        catch
+        {
+            var error = new Error(Error.ErrorType.UserIsNotExist);
+            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
+        }
+    }
+
+    public void AddUser(User user)
+    {
+        var dbUser = GetUser(user);
+        if (dbUser == null)
+            InsertObject(user, "User");
         else
         {
             var error = new Error(Error.ErrorType.UserIsAlreadyExist);
@@ -103,11 +124,11 @@ public class EmployeeService : DatabaseActions, IEmployee
         }
     }
 
-    public void RemoveEmployee(Employee employee)
+    public void RemoveUser(User user)
     {
-        var dbEmployee = GetEmployee(employee);
-        if (dbEmployee != null)
-            RemoveObject(dbEmployee, "Employee");
+        var dbUser = GetUser(user);
+        if (dbUser != null)
+            RemoveObject(dbUser, "User");
         else
         {
             var error = new Error(Error.ErrorType.UserIsNotExist);
@@ -115,48 +136,21 @@ public class EmployeeService : DatabaseActions, IEmployee
         }
     }
 
-    public void UpdateEmployee(Employee employee)
+    public void UpdateUser(User user)
     {
-        var dbEmployee = GetEmployee(employee);
-        if (dbEmployee != null)
-            UpdateObject(employee, "Employee");
+        var dbUser = GetUser(user);
+        if (dbUser != null)
+            UpdateObject(user, "User");
         else
         {
             var error = new Error(Error.ErrorType.UserIsNotExist);
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
-    }
+    } 
 
-    public Employee GetEmployee(Employee employee)
+    public List<User> GetAllUsers()
     {
-        try
-        {
-           return GetObject<Employee>("_userId", employee._userId, "Employee").Result;
-            
-        }
-        catch
-        {
-            var error = new Error(Error.ErrorType.UserIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        return GetAllObject<User>("User");
     }
-
-    public Employee GetEmployee(string employeeId)
-    {
-        try
-        {
-            return GetObject<Employee>(employeeId, "Employee").Result;
-        }
-        catch
-        {
-            var error = new Error(Error.ErrorType.UserIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    }
-
-    //public List<Employee> GetAllEmployees()
-    //{
-    //    return GetAllObject<Employee>("Employee").Result;
-    //}
 
 }

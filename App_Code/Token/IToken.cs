@@ -24,5 +24,5 @@ public interface IToken
         BodyStyle = WebMessageBodyStyle.Bare,
         UriTemplate = "SignIn")
     ]
-    Employee SignIn(Employee employee);
+    User SignIn(User user);
 }
