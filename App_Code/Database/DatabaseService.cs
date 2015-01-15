@@ -5,6 +5,24 @@ using System;
 public class DatabaseService : IDatabaseService
 {
 
+    #region Properties
+
+    public readonly User userA = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
+    public readonly User userB = new User("Sari", "123", "Sari", "Q", "sari@gmail.com", "T", DateTime.Today, "role", true);
+    public readonly User userC = new User("Adi", "123", "Adi", "B", "adi@gmail.com", "K", DateTime.Today, "role", true);
+    public readonly User userD = new User("User", "123");
+
+    public readonly Meeting meetingA = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "FreeText");
+    public readonly Meeting meetingB = new Meeting("123", "123", "meetingB", "B", DateTime.Today, "FreeText");
+
+    public readonly Assignment assignmentA = new Assignment("123", "AssignmentA", "FreeText", false);
+    public readonly Assignment assignmentB = new Assignment("123", "AssignmentB", "FreeText", false);
+
+    public readonly Patient patientA = new Patient("111", "A", "A", "a@gmail.com", "A", DateTime.Today, null);
+    public readonly Patient patientB = new Patient("222", "B", "B", "b@gmail.com", "B", DateTime.Today, null);
+
+    #endregion
+
     public void Initialize()
     {
         CreateCollection("User");
@@ -12,68 +30,47 @@ public class DatabaseService : IDatabaseService
 
         CreateCollection("Meeting");
 
-        //CreateCollection("Assignment");
+        CreateCollection("Assignment");
 
-        //CreateCollection("Patient");
-        //SetCollectionPrimeryKey("Patient", "identityNumber");
+        CreateCollection("Patient");
+        SetCollectionPrimeryKey("Patient", "identity_number");
 
         InitializeUserCollection();
-        //InitializePatientCollection();
+        InitializePatientCollection();
         InitializeMeetingCollection();
-        //InitializeAssignmentCollection();
+        InitializeAssignmentCollection();
     }
 
+    private void InitializeAssignmentCollection()
+    {
+        var assignmentService = new AssignmentService();
+        assignmentService.AddAssignment(assignmentA);
+        assignmentService.AddAssignment(assignmentB);
+    }
 
-    //private void InitializeAssignmentCollection()
-    //{
-    //    var assignmentService = new AssignmentService();
-
-    //    var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
-
-    //    var assignment = new Assignment(user, "AssignmentA", "freeText", false);
-    //    assignmentService.AddAssignment(assignment);
-
-    //    assignment = new Assignment(user, "AssignmentB", "freeText", false);
-    //    assignmentService.AddAssignment(assignment);
-    //}
-
-    //private void InitializePatientCollection()
-    //{
-    //    var patientService = new PatientService();
-
-    //    var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
-
-    //    var assignment = new Assignment(user, "AssignmentA", "freeText", false);
-    //    Assignment[] assignments = new Assignment[] { assignment };
-
-    //    var patient = new Patient("123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, assignments);
-    //    patientService.AddPatient(patient);
-
-    //    patient = new Patient("1233", "Sari", "Q", "sari@gmail.com", "K", DateTime.Today, assignments);
-    //    patientService.AddPatient(patient);
-    //}
+    private void InitializePatientCollection()
+    {
+        var patientService = new PatientService();
+        patientService.AddPatient(patientA);
+        patientService.AddPatient(patientB);
+    }
 
     private void InitializeUserCollection()
     {
         var userService = new UserService();
-
-        var user = new User("Karin", "123", "Karin", "B", "karin@gmail.com", "K", DateTime.Today, "role", true);
-        userService.AddUser(user);
-
-        user = new User("Sari", "123", "Sari", "Q", "sari@gmail.com", "K", DateTime.Today, "role", false);
-        userService.AddUser(user);
+        userService.AddUser(userA);
+        userService.AddUser(userB);
+        userService.AddUser(userC);
+        userService.AddUser(userD);
     }
 
     private void InitializeMeetingCollection()
     {
         var meetingService = new MeetingService();
-
-        var meeting = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "freeText");
-        meetingService.AddMeeting(meeting);
-
-        meeting = new Meeting("123", "123", "meetingB", "K", DateTime.Today, "freeText");
-        meetingService.AddMeeting(meeting);
+        meetingService.AddMeeting(meetingA);
+        meetingService.AddMeeting(meetingB);
     }
+
 
     private MongoDatabase GetDatabase()
     {
@@ -101,5 +98,4 @@ public class DatabaseService : IDatabaseService
         var collection = GetCollection(collectionName);
         collection.EnsureIndex(new IndexKeysBuilder().Ascending(primeryKeyName), IndexOptions.SetUnique(true));
     }
-
 }

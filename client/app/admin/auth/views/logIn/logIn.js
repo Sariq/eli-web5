@@ -87,7 +87,7 @@
              }, function (d) {
                  $scope.error = d;
                //  console.log($scope.error.data._errorDescription)
-                 swal({ title: $scope.error.data._errorDescription, text: "Please check your User Name and Password!", type: "warning", confirmButtonText: "Try Again" }, function (isConfirm) { if (isConfirm) { } });
+                 swal({ title: $scope.error.data.error_description, text: "Please check your User Name and Password!", type: "warning", confirmButtonText: "Try Again" }, function (isConfirm) { if (isConfirm) { } });
               $scope.error =d;
            //  console.log($scope.error)
                //$scope.obj.user._password=''

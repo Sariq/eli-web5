@@ -2,12 +2,10 @@
 using System.Runtime.Serialization;
 
 [DataContract]
-public class User : DatabaseObject
+public class UserForClient : DatabaseObject
 {
-    [DataMember]
+    [DataMember] 
     public string userId { get; set; }
-    [DataMember]
-    public string password { get; set; }
     [DataMember]
     public string first_name { get; set; }
     [DataMember]
@@ -16,41 +14,31 @@ public class User : DatabaseObject
     public string email { get; set; }
     [DataMember]
     public string address { get; set; }
-    [DataMember]
+    [DataMember] 
     public DateTime birth_date { get; set; }
     [DataMember]
     public string role { get; set; }
-    [DataMember]
+    [DataMember] 
     public Boolean isRememberMe { get; set; }
 
-
-    public User(string userId, string password, string firstName, string lastName, string email, string address, 
-        DateTime birth_date, string role, bool isRememberMe)
+    public UserForClient(string userId, string password, string firstName, string lastName, string email, string address,
+        DateTime birthDate, string role, bool isRememberMe) 
         : base()
     {
         this.userId = userId;
-        this.password = password;
         this.first_name = firstName;
         this.last_name = lastName;
         this.email = email;
         this.address = address;
-        this.birth_date = birth_date;
+        this.birth_date = birthDate;
         this.role = role;
         this.isRememberMe = isRememberMe;
     }
 
-    public User(string userId, string password)
-        : base()
-    {
-        this.userId = userId;
-        this.password = password;
-    }
-
-    public User(User user)
+    public UserForClient(User user)
     {
         this._id = user._id;
         this.userId = user.userId;
-        this.password = user.password;
         this.first_name = user.first_name;
         this.last_name = user.last_name;
         this.email = user.email;
@@ -59,5 +47,4 @@ public class User : DatabaseObject
         this.role = user.role;
         this.isRememberMe = user.isRememberMe;
     }
- 
 }

@@ -38,11 +38,11 @@ public class UserService : DatabaseActions, IUser
 
         communication.SetTokenToHeader(dbUser);
 
-        //// Example
+        // Example
         //var token2 = new ClientServerCommunicationActions().GetTokenFromHeader();
         //new ClientServerCommunicationActions().SetTokenToHeader(token2);
         //new ClientServerCommunicationActions().SetTokenToHeader_AllDetails_OnlyForExample(token2);
-        //// End Example
+        // End Example
 
         return dbUser;
     }
