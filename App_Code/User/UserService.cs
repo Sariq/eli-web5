@@ -4,7 +4,6 @@ using System.Net;
 using System.ServiceModel.Web;
 using System.Web;
 
-
 public class UserService : DatabaseActions, IUser
 {
     ClientServerCommunicationActions communication = new ClientServerCommunicationActions();

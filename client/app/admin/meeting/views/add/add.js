@@ -28,6 +28,7 @@
 
         if (self.meetingId) {
             self.meeting = MeetingAdmin.get(self.meetingId);
+            console.log(self.meeting);
             self.meeting.$promise.then(function (result) {
                
                 $http({

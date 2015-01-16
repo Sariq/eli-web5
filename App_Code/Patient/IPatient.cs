@@ -21,7 +21,7 @@ public interface IPatient
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api/{id}")
     ]
-    Patient GetPatient(string patientIdentityNumber);
+    Patient GetPatient(string id);
 
     [OperationContract]
     [WebInvoke(
@@ -30,7 +30,7 @@ public interface IPatient
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api/{id}")
     ]
-    void RemovePatient(string patientId);
+    void RemovePatient(string id);
 
     [OperationContract]
     [WebInvoke(
