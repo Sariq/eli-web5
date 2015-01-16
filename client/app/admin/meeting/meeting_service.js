@@ -17,6 +17,10 @@
       return self.meetingResource.get({id:meeting_id });
     };
 
+    self.addTask = function (meeting,task) {
+        meeting.tasks.push(task);
+    };                       
+
     self.save = function (meeting) {
       return self.meetingResource.save();
     };
@@ -27,8 +31,8 @@
             patientId: '',
             title: '',
             adress: '',
-       
-            note: '',
+            tasks:[],
+            note: ''
         };
     
       return new self.meetingResource(meeting);

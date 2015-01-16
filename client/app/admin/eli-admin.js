@@ -1,9 +1,10 @@
 ﻿'use strict';
 
 
-  angular.module('eli.admin', [
-  'ngResource',
+angular.module('eli.admin', [ 
+  'ngResource', 'eli.common',
   'ui.router',
+  'ui.bootstrap',
   'LocalStorageModule',
   'angular-jwt',
   'angular-websocket',

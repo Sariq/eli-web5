@@ -18,7 +18,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0d66c79d-b4b4-4218-b95e-cbe0b2dbbb49}</ProjectGuid>
     <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
-    <SourceWebVirtualPath>/eli-web52</SourceWebVirtualPath>
+    <SourceWebVirtualPath>/eli-web5</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SourceWebProject>
     </SourceWebProject>

@@ -5,7 +5,7 @@
      * @param MeetingAdmin: Service
      * @constructor
      */
-    function MeetingAddController($location, $scope, MeetingAdmin, $stateParams) {
+    function MeetingAddController($location, $scope, MeetingAdmin, $stateParams, TaskModalService, $modal) {
         var self = this;
         self.error = '';
         self.debug = '';
@@ -79,16 +79,54 @@
 
 
 
+        self.openModal = function () {
+            //MeetingAdmin.addTask(self.meeting);
+           
+            console.log('TaskModalService.openModal');
+            var newTask = { title: '', user: '', content: '', isDone: false };
+            var modalInstance = $modal.open({
+                templateUrl: '../admin/partials/task_modal/views/add/add.html',
+                controller: 'TaskModalInstanceCtrl',
+                size: 'lg',
+                resolve: {
+                    data: function () {
+                        return { data: newTask };
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (res) {
+                console.log(res);
+                MeetingAdmin.addTask(self.meeting,res);
+                console.log('Selected True');
+            }, function (data) {
+                var resp = angular.copy(data);
+                console.log('Selected false');
+            });
+        };
 
 
+        //self.bgColor = {};
 
+        //self.init = function () {
 
+        //}
+
+        //self.pickColor = function () {
+        //    return 'red';
+        //}
+
+        //self.newColor = function () {
+        //    alert()
+        //    self.bgColor['background'] = self.pickColor();
+
+        //}
 
 
     }
 
     angular.module('eli.admin')
-        .controller('MeetingAddController', ['$location', '$scope', 'MeetingAdmin', '$stateParams', MeetingAddController]);
+        .controller('MeetingAddController', ['$location', '$scope', 'MeetingAdmin', '$stateParams','TaskModalService','$modal', MeetingAddController]);
 }());
 
 
