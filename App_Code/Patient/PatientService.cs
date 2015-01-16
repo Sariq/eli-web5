@@ -44,10 +44,11 @@ public class PatientService : DatabaseActions, IPatient
 
     public Patient GetPatient(string patientIdentityNumber)
     {
-        var dbPatient = GetPatient(patientIdentityNumber);
-        if (dbPatient != null)
+        try
+        {
             return GetObject<Patient>("identity_number", patientIdentityNumber, "Patient").Result;
-        else
+        }
+        catch
         {
             var error = new Error(Error.ErrorType.PatientIsNotExist);
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);

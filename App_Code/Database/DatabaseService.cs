@@ -15,8 +15,8 @@ public class DatabaseService : IDatabaseService
     public readonly Assignment assignmentA = new Assignment("AssignmentA", "FreeText", false);
     public readonly Assignment assignmentB = new Assignment("AssignmentB", "FreeText", false);
 
-    public readonly Patient patientA = new Patient("111", "A", "A", "a@gmail.com", "A", DateTime.Today, null);
-    public readonly Patient patientB = new Patient("222", "B", "B", "b@gmail.com", "B", DateTime.Today, null);
+    public readonly Patient patientA = new Patient("111", "A", "A", "a@gmail.com", "A", DateTime.Today);
+    public readonly Patient patientB = new Patient("222", "B", "B", "b@gmail.com", "B", DateTime.Today);
 
     #endregion
 
@@ -33,9 +33,9 @@ public class DatabaseService : IDatabaseService
         SetCollectionPrimeryKey("Patient", "identity_number");
 
         InitializeUserCollection();
-        InitializePatientCollection();
         InitializeMeetingCollection();
         InitializeAssignmentCollection();
+        InitializePatientCollection();
     }
 
     private void InitializeAssignmentCollection()
