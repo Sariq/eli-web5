@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('eli.common').controller('TaskModalInstanceCtrl', function ($scope, $modalInstance,data) {
+    angular.module('eli.common').controller('TaskModalInstanceCtrl', function ($scope, $modalInstance, data, TaskgAdmin) {
 
 
         $scope.task = TaskgAdmin.create();
@@ -14,8 +14,12 @@
         };
 
         $scope.ok = function () {
-             //add the task to assiement DB and return the id of the object
-            $modalInstance.close($scope.items.data);
+            //add the task to assiement DB and return the id of the object
+            $scope.task.$save(function (response) {
+           
+                $modalInstance.close(response._id);
+            });
+           
         };
 
         $scope.formatCell = function (cell, last) {

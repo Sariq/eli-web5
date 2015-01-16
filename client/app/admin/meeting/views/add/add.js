@@ -96,7 +96,7 @@
             });
 
             modalInstance.result.then(function (res) {
-                console.log(res);
+   
                 MeetingAdmin.addTask(self.meeting,res);
                 console.log('Selected True');
             }, function (data) {

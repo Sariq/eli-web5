@@ -17,11 +17,11 @@ public class Meeting : DatabaseObject
     [DataMember]
     public string note { get; set; }
     [DataMember]
-    public Assignment[] assignments { get; set; }
+    public string[] assignments { get; set; }
 
 
     public Meeting(string therapistId, string patientId, string title, string address, DateTime time, string note,
-        Assignment[] assignments)
+        string[] assignments)
         : base()
     {
         this.therapistId = therapistId;

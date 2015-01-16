@@ -14,6 +14,7 @@ public class Assignment : DatabaseObject
     public Assignment(string title, string content, bool isDone)
         : base()
     {
+        
         this.title = title;
         this.content = content;
         this.isDone = isDone;
@@ -22,6 +23,7 @@ public class Assignment : DatabaseObject
     public Assignment(Assignment assignment)
         : base()
     {
+        this._id = assignment._id;
         this.title = assignment.title;
         this.content = assignment.content;
         this.isDone = assignment.isDone;

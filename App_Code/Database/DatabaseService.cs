@@ -65,7 +65,7 @@ public class DatabaseService : IDatabaseService
     {
         var meetingService = new MeetingService();
 
-        Assignment[] assignment = new Assignment[] {assignmentA, assignmentB};
+        string[] assignment = new string[] {"1231fdsafasfas123","dwseqweqfa123123sda" };
         
         Meeting meetingA = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "FreeText", assignment);
         Meeting meetingB = new Meeting("123", "123", "meetingB", "B", DateTime.Today, "FreeText", null);

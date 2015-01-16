@@ -32,9 +32,13 @@ public class MeetingService : DatabaseActions, IMeeting
 
     public List<Assignment> GetAllAssignmentsOfMeeting(string meetingId)
     {
+        List<Assignment> assignments = new List<Assignment> { };
         Meeting meeting = GetMeeting(meetingId);
-
-        List<Assignment> assignments = new List<Assignment>(meeting.assignments);
+        foreach (string assignmentId in meeting.assignments) 
+        {
+            Assignment assignment = GetObject<Assignment>(assignmentId, "Assignment").Result;
+            assignments.Add(assignment);
+        }
 
         return assignments;
     }

@@ -10,6 +10,11 @@ public class AssignmentService : DatabaseActions, IAssignment
         var dbAssignment = GetAssignment(assignment._id);
         return dbAssignment;
     }
+    public Assignment AddAssignment2(Assignment assignment)
+    {
+        var dbAssignment = InsertObject2<Assignment>(assignment, "Assignment").Result;
+        return dbAssignment;
+    }
 
     public void RemoveAssignment(string assignmentId)
     {

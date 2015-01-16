@@ -8,7 +8,7 @@
       locations:['apc', 'afula']
     };
 
-    self.taskResource = $resource('/TaskgService.svc/api/:id', {},
+    self.taskResource = $resource('/AssignmentService.svc/api/:id', {},
       {update: {method: 'PUT'}}
     );
 
@@ -62,6 +62,6 @@
 
   }
 
-    angular.module('eli.admin')
+    angular.module('eli.common')
     .service('TaskgAdmin', ['$resource',TaskgAdmin])
 }());

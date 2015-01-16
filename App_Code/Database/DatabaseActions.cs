@@ -16,6 +16,13 @@ public class DatabaseActions
         obj._id = Convert.ToString((ObjectId.GenerateNewId()));
         await collection.InsertAsync(obj);
     }
+    protected async Task<ObjectType> InsertObject2<ObjectType>(DatabaseObject obj, string collectionName)
+    {
+        var collection = database.GetCollection(collectionName);
+        obj._id = Convert.ToString((ObjectId.GenerateNewId()));
+        await collection.InsertAsync(obj);
+        return await GetObject<ObjectType>(fieldName: "_id", fieldValue: obj._id, collectionName: collectionName);
+    }
 
     protected async void RemoveObject(string objId, string collectionName)
     {

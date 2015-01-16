@@ -11,7 +11,7 @@
         console.log(meeting);
         console.log(meeting._id);
         alert(meeting._id)
-        meeting.$remove({_id: meeting._id}, function () {
+        meeting.$remove({id: meeting._id}, function () {
           self.meetings = MeetingAdmin.query();
         });
       };

@@ -5,14 +5,14 @@ using System.ServiceModel.Web;
 [ServiceContract]
 public interface IAssignment
 {
-    [OperationContract]
-    [WebInvoke(
-         Method = "GET",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api/{id}")
-    ]
-    Assignment GetAssignment(string assignmentId);
+    //[OperationContract]
+    //[WebInvoke(
+    //     Method = "GET",
+    //     ResponseFormat = WebMessageFormat.Json,
+    //     BodyStyle = WebMessageBodyStyle.Bare,
+    //     UriTemplate = "api/{id}")
+    //]
+    //Assignment GetAssignment(string assignmentId);
 
     [OperationContract]
     [WebInvoke(
@@ -21,33 +21,33 @@ public interface IAssignment
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api")
     ]
-    Assignment AddAssignment(Assignment assignment);
+    Assignment AddAssignment2(Assignment assignment);
 
-    [OperationContract]
-    [WebInvoke(
-         Method = "DELETE",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api/{id}")
-    ]
-    void RemoveAssignment(string assignmentId);
+    //[OperationContract]
+    //[WebInvoke(
+    //     Method = "DELETE",
+    //     ResponseFormat = WebMessageFormat.Json,
+    //     BodyStyle = WebMessageBodyStyle.Bare,
+    //     UriTemplate = "api/{id}")
+    //]
+    //void RemoveAssignment(string assignmentId);
 
-    [OperationContract]
-    [WebInvoke(
-         Method = "PUT",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api")
-    ]
-    void UpdateAssignment(Assignment assignment);
+    //[OperationContract]
+    //[WebInvoke(
+    //     Method = "PUT",
+    //     ResponseFormat = WebMessageFormat.Json,
+    //     BodyStyle = WebMessageBodyStyle.Bare,
+    //     UriTemplate = "api")
+    //]
+    //void UpdateAssignment(Assignment assignment);
 
-    [OperationContract]
-    [WebInvoke(
-         Method = "GET",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api")
-    ]
-    List<Assignment> GetAllAssignments();
+    //[OperationContract]
+    //[WebInvoke(
+    //     Method = "GET",
+    //     ResponseFormat = WebMessageFormat.Json,
+    //     BodyStyle = WebMessageBodyStyle.Bare,
+    //     UriTemplate = "api")
+    //]
+    //List<Assignment> GetAllAssignments();
 
 }

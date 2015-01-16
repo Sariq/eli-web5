@@ -17,8 +17,8 @@
       return self.meetingResource.get({id:meeting_id });
     };
 
-    self.addTask = function (meeting,task) {
-        meeting.tasks.push(task);
+    self.addTask = function (meeting, task) {
+        meeting.assignments.push(task);
     };                       
 
     self.save = function (meeting) {
@@ -30,10 +30,16 @@
             therapistId: '',
             patientId: '',
             title: '',
-            adress: '',
-            tasks:[],
+            address: '',
+            assignments:[],
             note: ''
         };
+
+
+
+
+
+
     
       return new self.meetingResource(meeting);
     };
