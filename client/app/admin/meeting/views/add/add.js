@@ -13,6 +13,7 @@
         self.info = MeetingAdmin.info;
         self.assignments = '';
         self.meeting = MeetingAdmin.create();
+        console.log(self.meeting);
    
         self.meetingId = $stateParams.meetingId;
         self.steps = [];
@@ -28,8 +29,9 @@
 
         if (self.meetingId) {
             self.meeting = MeetingAdmin.get(self.meetingId);
+            console.log("sssAAAas")
             console.log(self.meeting);
-            self.meeting.$promise.then(function (result) {
+            self.meeting.$q.then(function (result) {
                
                 $http({
                     url: '/AssignmentService.svc/getAssignmentsByIds',
