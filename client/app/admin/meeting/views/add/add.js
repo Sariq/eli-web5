@@ -27,20 +27,19 @@
         };
 
         if (self.meetingId) {
-         
             self.meeting = MeetingAdmin.get(self.meetingId);
             self.meeting.$promise.then(function (result) {
                
                 $http({
-                    url: '/AssignmentService.svc/getAssignments',
+                    url: '/AssignmentService.svc/getAssignmentsByIds',
                     method: 'POST',
                     data: result.assignments
                 }).then(function (response) {
-                    alert("re")
+               
                     self.assignments = response.data;
                   
                   
-                }, function () { alert("rssse") });
+                }, function () { alert("getAssignmentsByIds edit error") });
 
             });
 
@@ -109,7 +108,18 @@
 
             modalInstance.result.then(function (res) {
    
-                MeetingAdmin.addTask(self.meeting,res);
+                MeetingAdmin.addTask(self.meeting, res);
+                $http({
+                    url: '/AssignmentService.svc/getAssignmentsByIds',
+                    method: 'POST',
+                    data: self.meeting.assignments
+                }).then(function (response) {
+                 
+                    self.assignments = response.data;
+
+
+                }, function () { alert("getAssignmentsByIds error") });
+
                 console.log('Selected True');
             }, function (data) {
                 var resp = angular.copy(data);

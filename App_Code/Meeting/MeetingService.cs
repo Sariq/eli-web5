@@ -7,7 +7,7 @@ public class MeetingService : DatabaseActions, IMeeting
 {
     public void AddMeeting(Meeting meeting)
     {
-        InsertObject(meeting, "Meeting");
+        InsertObject(meeting, "Meeting");     
     }
 
     public void RemoveMeeting(string mettingId)

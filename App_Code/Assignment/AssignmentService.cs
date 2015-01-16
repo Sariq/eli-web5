@@ -10,10 +10,6 @@ public class AssignmentService : DatabaseActions, IAssignment
         var dbAssignment = GetAssignment(assignment._id);
         return dbAssignment;
     }
-    public List<Assignment> AddAssignment2(string[] assignments)
-    {
-        return GetAllObject<Assignment>("Assignment");
-    }
 
     public void RemoveAssignment(string assignmentId)
     {
@@ -34,4 +30,16 @@ public class AssignmentService : DatabaseActions, IAssignment
     {
         return GetAllObject<Assignment>("Assignment");
     }
+
+    public List<Assignment> getAssignmentsByIds(string[] tmpAssignments)
+    {
+        List<Assignment> assignments = new List<Assignment> { };
+        foreach (string assignmentId in tmpAssignments)
+        {
+            Assignment assignment = GetObject<Assignment>(assignmentId, "Assignment").Result;
+            assignments.Add(assignment);
+        }
+        return assignments;
+    }
+
 }
