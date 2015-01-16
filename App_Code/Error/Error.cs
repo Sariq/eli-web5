@@ -1,9 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 [DataContract]
-public class Error : DatabaseObject
+public class Error
 {
-
     public enum ErrorType
     {
         PasswordIsIncorrect,
@@ -26,7 +25,7 @@ public class Error : DatabaseObject
     public string error_description { get; set; }
 
 
-    public Error(ErrorType errorType) : base()
+    public Error(ErrorType errorType)
     {
         error_description = errorType.ToString();
     }

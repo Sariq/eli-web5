@@ -17,10 +17,10 @@ public class DatabaseActions
         await collection.InsertAsync(obj);
     }
 
-    protected async void RemoveObject(DatabaseObject obj, string collectionName)
+    protected async void RemoveObject(string objId, string collectionName)
     {
         var collection = database.GetCollection(collectionName);
-        await collection.RemoveAsync(new QueryDocument("_id", obj._id));
+        await collection.RemoveAsync(new QueryDocument("_id", objId));
     }
 
     protected async void UpdateObject(DatabaseObject obj, string collectionName)
@@ -41,7 +41,7 @@ public class DatabaseActions
         return obj;
     }
 
-    protected  List<ObjectType> GetAllObject<ObjectType>(string collectionName)
+    protected List<ObjectType> GetAllObject<ObjectType>(string collectionName)
     {
         var collection = database.GetCollection(collectionName);
         var obj =  collection.FindAllAs<ObjectType>();    

@@ -11,22 +11,26 @@ public class Meeting : DatabaseObject
     [DataMember] 
     public string title { get; set; }    
     [DataMember]
-    public string adress { get; set; }
+    public string address { get; set; }
     [DataMember]
     public DateTime time { get; set; }
     [DataMember]
     public string note { get; set; }
+    [DataMember]
+    public Assignment[] assignments { get; set; }
 
 
-    public Meeting(string therapistId, string patientId, string title, string adress, DateTime time, string note)
+    public Meeting(string therapistId, string patientId, string title, string address, DateTime time, string note,
+        Assignment[] assignments)
         : base()
     {
         this.therapistId = therapistId;
         this.patientId = patientId;
         this.title = title;
-        this.adress = adress;
+        this.address = address;
         this.time = time;
         this.note = note;
+        this.assignments = assignments;
     }
 
     public Meeting(Meeting meeting)
@@ -35,9 +39,10 @@ public class Meeting : DatabaseObject
         this.therapistId = meeting.therapistId;
         this.patientId = meeting.patientId;
         this.title = meeting.title;
-        this.adress = meeting.adress;
+        this.address = meeting.address;
         this.time = meeting.time;
         this.note = meeting.note;
+        this.assignments = meeting.assignments;
     }
  
 }

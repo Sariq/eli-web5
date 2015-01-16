@@ -7,53 +7,36 @@ public class MeetingService : DatabaseActions, IMeeting
 {
     public void AddMeeting(Meeting meeting)
     {
-    
-            InsertObject(meeting, "Meeting");
-  
+        InsertObject(meeting, "Meeting");
     }
 
     public void RemoveMeeting(string mettingId)
     {
-        var dbMeeting = GetMeeting(mettingId);
-        if (dbMeeting != null)
-            RemoveObject(dbMeeting, "Meeting");
-        else
-        {
-            var error = new Error(Error.ErrorType.MeetingIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        RemoveObject(mettingId, "Meeting");
     }
 
     public void UpdateMeeting(Meeting metting)
     {
-        var dbMeeting = GetMeeting(metting._id);
-        if (dbMeeting != null)
-            UpdateObject(metting, "Meeting");
-        else
-        {
-            var error = new Error(Error.ErrorType.MeetingIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        UpdateObject(metting, "Meeting");
     }
 
     public Meeting GetMeeting(string mettingId)
     {
-        try
-        {
-            return GetObject<Meeting>(mettingId, "Meeting").Result;
-        }
-        catch
-        {
-            var error = new Error(Error.ErrorType.MeetingIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        return GetObject<Meeting>(mettingId, "Meeting").Result;
     }
 
-
-    public List<Meeting> GetMeetingList()
+    public List<Meeting> GetAllMeetings()
     {
-       //return new List<Meeting>();
-
         return GetAllObject<Meeting>("Meeting");
     }
+
+    public List<Assignment> GetAllAssignmentsOfMeeting(string meetingId)
+    {
+        Meeting meeting = GetMeeting(meetingId);
+
+        List<Assignment> assignments = new List<Assignment>(meeting.assignments);
+
+        return assignments;
+    }
+
 }

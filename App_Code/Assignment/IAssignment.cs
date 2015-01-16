@@ -3,68 +3,51 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 
 [ServiceContract]
-public interface IUser
+public interface IAssignment
 {
-    [OperationContract]
-    [WebInvoke(
-        Method = "POST",
-        ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare,
-        UriTemplate = "SignIn")
-    ]
-    User SignIn(User user);
-
-    [OperationContract]
-    [WebInvoke(
-        Method = "POST",
-        ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare,
-        UriTemplate = "SignOut")
-    ]
-    void SignOut();
-
     [OperationContract]
     [WebInvoke(
          Method = "GET",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "GetUser/{id}")
+         UriTemplate = "api/{id}")
     ]
-    User GetUser(string id);
+    Assignment GetAssignment(string assignmentId);
 
     [OperationContract]
     [WebInvoke(
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "AddUser")
+         UriTemplate = "api")
     ]
-    void AddUser(User user);
+    Assignment AddAssignment(Assignment assignment);
 
     [OperationContract]
     [WebInvoke(
          Method = "DELETE",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "RemoveUser")
+         UriTemplate = "api/{id}")
     ]
-    void RemoveUser(string userId);
+    void RemoveAssignment(string assignmentId);
 
     [OperationContract]
     [WebInvoke(
          Method = "PUT",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "UpdateUser")
+         UriTemplate = "api")
     ]
-    void UpdateUser(User user);
+    void UpdateAssignment(Assignment assignment);
 
     [OperationContract]
     [WebInvoke(
          Method = "GET",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "GetAllUsers")
+         UriTemplate = "api")
     ]
-    List<User> GetAllUsers();
+    List<Assignment> GetAllAssignments();
+
 }

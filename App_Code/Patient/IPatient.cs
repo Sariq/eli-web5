@@ -3,68 +3,50 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 
 [ServiceContract]
-public interface IUser
+public interface IPatient
 {
     [OperationContract]
     [WebInvoke(
-        Method = "POST",
-        ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare,
-        UriTemplate = "SignIn")
+         Method = "POST",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api")
     ]
-    User SignIn(User user);
-
-    [OperationContract]
-    [WebInvoke(
-        Method = "POST",
-        ResponseFormat = WebMessageFormat.Json,
-        BodyStyle = WebMessageBodyStyle.Bare,
-        UriTemplate = "SignOut")
-    ]
-    void SignOut();
+    void AddPatient(Patient patient);
 
     [OperationContract]
     [WebInvoke(
          Method = "GET",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "GetUser/{id}")
+         UriTemplate = "api/{id}")
     ]
-    User GetUser(string id);
-
-    [OperationContract]
-    [WebInvoke(
-         Method = "POST",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "AddUser")
-    ]
-    void AddUser(User user);
+    Patient GetPatient(string patientIdentityNumber);
 
     [OperationContract]
     [WebInvoke(
          Method = "DELETE",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "RemoveUser")
+         UriTemplate = "api/{id}")
     ]
-    void RemoveUser(string userId);
+    void RemovePatient(string patientId);
 
     [OperationContract]
     [WebInvoke(
          Method = "PUT",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "UpdateUser")
+         UriTemplate = "api")
     ]
-    void UpdateUser(User user);
+    void UpdatePatient(Patient patient);
 
     [OperationContract]
     [WebInvoke(
          Method = "GET",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "GetAllUsers")
+         UriTemplate = "api")
     ]
-    List<User> GetAllUsers();
+    List<Patient> GetAllPatients();
 }
