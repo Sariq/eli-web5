@@ -2,7 +2,7 @@
     angular.module('eli.common').controller('TaskModalInstanceCtrl', function ($scope, $modalInstance,data) {
 
 
-
+        $scope.task = TaskgAdmin.create();
         $scope.items = data;
         
        
