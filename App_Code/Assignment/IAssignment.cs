@@ -5,14 +5,6 @@ using System.ServiceModel.Web;
 [ServiceContract]
 public interface IAssignment
 {
-    [OperationContract]
-    [WebInvoke(
-         Method = "GET",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api/{assignmentId}")
-    ]
-    Assignment GetAssignment(string assignmentId);
 
     [OperationContract]
     [WebInvoke(
@@ -21,16 +13,16 @@ public interface IAssignment
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api")
     ]
-    Assignment AddAssignment(Assignment assignment);
+    void AddAssignment(Assignment assignment);
 
     [OperationContract]
     [WebInvoke(
          Method = "DELETE",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api/{assignmentId}")
+         UriTemplate = "api/{id}")
     ]
-    void RemoveAssignment(string assignmentId);
+    void RemoveAssignment(string id);
 
     [OperationContract]
     [WebInvoke(
@@ -43,11 +35,29 @@ public interface IAssignment
 
     [OperationContract]
     [WebInvoke(
+         Method = "GET",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api/{id}")
+    ]
+    Assignment GetAssignment(string id);
+
+    [OperationContract]
+    [WebInvoke(
+         Method = "GET",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api")
+    ]
+    List<Assignment> GetAllAssignments();
+
+    [OperationContract]
+    [WebInvoke(
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "getAssignmentsByIds")
     ]
-    List<Assignment> getAssignmentsByIds(string[] assignments);
+    List<Assignment> GetAssignmentsByIds(string[] assignments);
 
 }

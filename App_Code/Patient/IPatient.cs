@@ -16,15 +16,6 @@ public interface IPatient
 
     [OperationContract]
     [WebInvoke(
-         Method = "GET",
-         ResponseFormat = WebMessageFormat.Json,
-         BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api/{id}")
-    ]
-    Patient GetPatient(string id);
-
-    [OperationContract]
-    [WebInvoke(
          Method = "DELETE",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
@@ -46,7 +37,25 @@ public interface IPatient
          Method = "GET",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api/{id}")
+    ]
+    Patient GetPatient(string id);
+
+    [OperationContract]
+    [WebInvoke(
+         Method = "GET",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api")
     ]
     List<Patient> GetAllPatients();
+
+    [OperationContract]
+    [WebInvoke(
+         Method = "POST",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api/{id}")
+    ]
+    List<Assignment> GetAllAssignmentsOfPatient(string id);
 }

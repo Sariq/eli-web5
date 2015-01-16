@@ -4,11 +4,11 @@ using System.ServiceModel.Web;
 
 public class AssignmentService : DatabaseActions, IAssignment
 {
-    public Assignment AddAssignment(Assignment assignment)
+    public void AddAssignment(Assignment assignment)
     {
         InsertObject(assignment, "Assignment");
-        var dbAssignment = GetAssignment(assignment._id);
-        return dbAssignment;
+        //var dbAssignment = GetAssignment(assignment._id);
+        //return dbAssignment;
     }
 
     public void RemoveAssignment(string assignmentId)
@@ -31,7 +31,7 @@ public class AssignmentService : DatabaseActions, IAssignment
         return GetAllObject<Assignment>("Assignment");
     }
 
-    public List<Assignment> getAssignmentsByIds(string[] tmpAssignments)
+    public List<Assignment> GetAssignmentsByIds(string[] tmpAssignments)
     {
         List<Assignment> assignments = new List<Assignment> { };
         foreach (string assignmentId in tmpAssignments)

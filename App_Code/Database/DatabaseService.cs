@@ -15,9 +15,12 @@ public class DatabaseService : IDatabaseService
     public readonly Assignment assignmentA = new Assignment("AssignmentA", "FreeText", false);
     public readonly Assignment assignmentB = new Assignment("AssignmentB", "FreeText", false);
 
-    public readonly Patient patientA = new Patient("111", "A", "A", "a@gmail.com", "A", DateTime.Today);
-    public readonly Patient patientB = new Patient("222", "B", "B", "b@gmail.com", "B", DateTime.Today);
+    public readonly Patient patientA = new Patient("111", "A", "A", "a@gmail.com", "A", DateTime.Today, new string[] { "AA", "BB" });
+    public readonly Patient patientB = new Patient("222", "B", "B", "b@gmail.com", "B", DateTime.Today, new string[] { "AA", "BB" });
 
+    public readonly Meeting meetingA = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "FreeText", new string[] { "AA", "BB" });
+    public readonly Meeting meetingB = new Meeting("123", "123", "meetingB", "B", DateTime.Today, "FreeText", new string[] { "AA", "BB" });
+    
     #endregion
 
     public void Initialize()
@@ -64,12 +67,6 @@ public class DatabaseService : IDatabaseService
     private void InitializeMeetingCollection()
     {
         var meetingService = new MeetingService();
-
-        string[] assignment = new string[] {"1231fdsafasfas123","dwseqweqfa123123sda" };
-        
-        Meeting meetingA = new Meeting("123", "123", "meetingA", "A", DateTime.Today, "FreeText", assignment);
-        Meeting meetingB = new Meeting("123", "123", "meetingB", "B", DateTime.Today, "FreeText", null);
-
         meetingService.AddMeeting(meetingA);
         meetingService.AddMeeting(meetingB);
     }

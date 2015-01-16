@@ -56,6 +56,42 @@ public class UserService : DatabaseActions, IUser
         }
     }
 
+    public void AddUser(User user)
+    {
+        var dbUser = GetUser(user.userId);
+        if (dbUser == null)
+            InsertObject(user, "User");
+        else
+        {
+            var error = new Error(Error.ErrorType.UserIsAlreadyExist);
+            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
+        }
+    }
+
+    public void RemoveUser(string userId)
+    {
+        var dbUser = GetUser(userId);
+        if (dbUser != null)
+            RemoveObject(userId, "User");
+        else
+        {
+            var error = new Error(Error.ErrorType.UserIsNotExist);
+            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
+        }
+    }
+
+    public void UpdateUser(User user)
+    {
+        var dbUser = GetUser(user.userId);
+        if (dbUser != null)
+            UpdateObject(user, "User");
+        else
+        {
+            var error = new Error(Error.ErrorType.UserIsNotExist);
+            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
+        }
+    }
+
     public User GetUser()
     {
         User user;
@@ -96,42 +132,6 @@ public class UserService : DatabaseActions, IUser
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
     }
-
-    public void AddUser(User user)
-    {
-        var dbUser = GetUser(user.userId);
-        if (dbUser == null)
-            InsertObject(user, "User");
-        else
-        {
-            var error = new Error(Error.ErrorType.UserIsAlreadyExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    }
-
-    public void RemoveUser(string userId)
-    {
-        var dbUser = GetUser(userId);
-        if (dbUser != null)
-            RemoveObject(userId, "User");
-        else
-        {
-            var error = new Error(Error.ErrorType.UserIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    }
-
-    public void UpdateUser(User user)
-    {
-        var dbUser = GetUser(user.userId);
-        if (dbUser != null)
-            UpdateObject(user, "User");
-        else
-        {
-            var error = new Error(Error.ErrorType.UserIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    } 
 
     public List<User> GetAllUsers()
     {

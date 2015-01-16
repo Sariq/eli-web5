@@ -39,7 +39,6 @@ public class MeetingService : DatabaseActions, IMeeting
             Assignment assignment = GetObject<Assignment>(assignmentId, "Assignment").Result;
             assignments.Add(assignment);
         }
-
         return assignments;
     }
 
