@@ -5,13 +5,13 @@
      * @param MeetingAdmin: Service
      * @constructor
      */
-    function MeetingAddController($location, $scope, MeetingAdmin, $stateParams, TaskModalService, $modal) {
+    function MeetingAddController($location, $scope, MeetingAdmin, $stateParams, TaskModalService, $modal, $http) {
         var self = this;
         self.error = '';
         self.debug = '';
         self.isNew = false;
         self.info = MeetingAdmin.info;
- 
+        self.assignments = '';
         self.meeting = MeetingAdmin.create();
    
         self.meetingId = $stateParams.meetingId;
@@ -29,8 +29,20 @@
         if (self.meetingId) {
          
             self.meeting = MeetingAdmin.get(self.meetingId);
-            //self.meeting.$promise.then(function (result) {
-            //});
+            self.meeting.$promise.then(function (result) {
+               
+                $http({
+                    url: '/AssignmentService.svc/getAssignments',
+                    method: 'POST',
+                    data: result.assignments
+                }).then(function (response) {
+                    alert("re")
+                    self.assignments = response.data;
+                  
+                  
+                }, function () { alert("rssse") });
+
+            });
 
         } else {
             self.isNew = true;
@@ -126,7 +138,7 @@
     }
 
     angular.module('eli.admin')
-        .controller('MeetingAddController', ['$location', '$scope', 'MeetingAdmin', '$stateParams','TaskModalService','$modal', MeetingAddController]);
+        .controller('MeetingAddController', ['$location', '$scope', 'MeetingAdmin', '$stateParams', 'TaskModalService', '$modal', '$http', MeetingAddController]);
 }());
 
 

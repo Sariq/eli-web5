@@ -18,6 +18,7 @@
     };
 
     self.addTask = function (meeting, task) {
+        alert(angular.toJson(meeting))
         meeting.assignments.push(task);
     };                       
 

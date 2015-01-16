@@ -19,9 +19,9 @@ public interface IAssignment
          Method = "POST",
          ResponseFormat = WebMessageFormat.Json,
          BodyStyle = WebMessageBodyStyle.Bare,
-         UriTemplate = "api")
+         UriTemplate = "getAssignments")
     ]
-    Assignment AddAssignment2(Assignment assignment);
+    List<Assignment> AddAssignment2(string[] assignments);
 
     //[OperationContract]
     //[WebInvoke(
