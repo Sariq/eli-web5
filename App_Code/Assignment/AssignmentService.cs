@@ -1,54 +1,33 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.ServiceModel.Web;
 
 public class AssignmentService : DatabaseActions, IAssignment
 {
-    public void AddAssignment(Assignment assignment)
+    public Assignment AddAssignment(Assignment assignment)
     {
+        InsertObject(assignment, "Assignment");
         var dbAssignment = GetAssignment(assignment._id);
-        if (dbAssignment == null)
-            InsertObject(assignment, "Assignment");
-        else
-        {
-            var error = new Error(Error.ErrorType.AssignmentIsAlreadyExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        return dbAssignment;
     }
 
     public void RemoveAssignment(string assignmentId)
     {
-        var dbAssignment = GetAssignment(assignmentId);
-        if (dbAssignment != null)
-            RemoveObject(dbAssignment, "Assignment");
-        else
-        {
-            var error = new Error(Error.ErrorType.AssignmentIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        RemoveObject(assignmentId, "Assignment");
     }
 
     public void UpdateAssignment(Assignment assignment)
     {
-        var dbAssignment = GetAssignment(assignment._id);
-        if (dbAssignment != null)
-            UpdateObject(assignment, "Assignment");
-        else
-        {
-            var error = new Error(Error.ErrorType.AssignmentIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
+        UpdateObject(assignment, "Assignment");
     }
 
     public Assignment GetAssignment(string assignmentId)
     {
-        try
-        {
-            return GetObject<Assignment>(assignmentId, "Assignment").Result;
-        }
-        catch
-        {
-            var error = new Error(Error.ErrorType.AssignmentIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    }   
+        return GetObject<Assignment>(assignmentId, "Assignment").Result;
+    }
+
+    public List<Assignment> GetAllAssignments()
+    {
+        return GetAllObject<Assignment>("Assignment");
+    }
 }

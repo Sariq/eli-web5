@@ -13,11 +13,12 @@ public class Patient : DatabaseObject
     [DataMember]
     public string email { get; set; }
     [DataMember]
-    public string adress { get; set; }
+    public string address { get; set; }
     [DataMember] 
     public DateTime birth_date { get; set; }
     [DataMember]
     public Assignment[] assignment { get; set; }
+
 
     public Patient(string identityNumber, string firstName, string lastName, string email, string adress,
         DateTime birthDate, Assignment[] assignment)
@@ -27,7 +28,7 @@ public class Patient : DatabaseObject
         this.first_name = firstName;
         this.last_name = lastName;
         this.email = email;
-        this.adress = adress;
+        this.address = adress;
         this.birth_date = birthDate;
         this.assignment = assignment;
     }
@@ -47,7 +48,7 @@ public class Patient : DatabaseObject
         this.first_name = patient.first_name;
         this.last_name = patient.last_name;
         this.email = patient.email;
-        this.adress = patient.adress;
+        this.address = patient.address;
         this.birth_date = patient.birth_date;
         this.assignment = patient.assignment;
     }

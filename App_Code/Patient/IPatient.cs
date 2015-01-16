@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
 [ServiceContract]
@@ -39,4 +40,13 @@ public interface IPatient
          UriTemplate = "api")
     ]
     void UpdatePatient(Patient patient);
+
+    [OperationContract]
+    [WebInvoke(
+         Method = "GET",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api")
+    ]
+    List<Patient> GetAllPatients();
 }

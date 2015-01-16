@@ -1,10 +1,11 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.ServiceModel.Web;
 
 
 public class PatientService : DatabaseActions, IPatient
-{
- 
+{ 
+
     public void AddPatient(Patient patient)
     {
         var dbPatient = GetPatient(patient.identity_number);
@@ -21,7 +22,7 @@ public class PatientService : DatabaseActions, IPatient
     {
         var dbPatient = GetPatient(patientIdentityNumber);
         if (dbPatient != null)
-            RemoveObject(dbPatient, "Patient");
+            RemoveObject(patientIdentityNumber, "Patient");
         else
         {
             var error = new Error(Error.ErrorType.PatientIsNotExist);
@@ -43,15 +44,19 @@ public class PatientService : DatabaseActions, IPatient
 
     public Patient GetPatient(string patientIdentityNumber)
     {
-        try
-        {
+        var dbPatient = GetPatient(patientIdentityNumber);
+        if (dbPatient != null)
             return GetObject<Patient>("identity_number", patientIdentityNumber, "Patient").Result;
-        }
-        catch
+        else
         {
             var error = new Error(Error.ErrorType.PatientIsNotExist);
             throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
         }
+    }
+
+    public List<Patient> GetAllPatients()
+    {
+        return GetAllObject<Patient>("Patient");
     }
 
 }

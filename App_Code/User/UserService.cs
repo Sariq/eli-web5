@@ -11,7 +11,7 @@ public class UserService : DatabaseActions, IUser
 
     public User SignIn(User user)
     {
-        var dbUser = GetUser(user);
+        var dbUser = GetUser(user.userId);
 
         if (dbUser == null)
         {
@@ -85,25 +85,11 @@ public class UserService : DatabaseActions, IUser
         return user;
     }
 
-    public User GetUser(User user)
-    {
-        try
-        {
-            return GetObject<User>("userId", user.userId, "User").Result;
-
-        }
-        catch
-        {
-            var error = new Error(Error.ErrorType.UserIsNotExist);
-            throw new WebFaultException<Error>(error, HttpStatusCode.BadRequest);
-        }
-    }
-
     public User GetUser(string userId)
     {
         try
         {
-            return GetObject<User>(userId, "User").Result;
+            return GetObject<User>("userId", userId, "User").Result;
         }
         catch
         {
@@ -114,7 +100,7 @@ public class UserService : DatabaseActions, IUser
 
     public void AddUser(User user)
     {
-        var dbUser = GetUser(user);
+        var dbUser = GetUser(user.userId);
         if (dbUser == null)
             InsertObject(user, "User");
         else
@@ -124,11 +110,11 @@ public class UserService : DatabaseActions, IUser
         }
     }
 
-    public void RemoveUser(User user)
+    public void RemoveUser(string userId)
     {
-        var dbUser = GetUser(user);
+        var dbUser = GetUser(userId);
         if (dbUser != null)
-            RemoveObject(dbUser, "User");
+            RemoveObject(userId, "User");
         else
         {
             var error = new Error(Error.ErrorType.UserIsNotExist);
@@ -138,7 +124,7 @@ public class UserService : DatabaseActions, IUser
 
     public void UpdateUser(User user)
     {
-        var dbUser = GetUser(user);
+        var dbUser = GetUser(user.userId);
         if (dbUser != null)
             UpdateObject(user, "User");
         else

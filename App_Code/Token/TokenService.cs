@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.ServiceModel.Web;
-using System.Web;
 
 public class TokenService : DatabaseActions, IToken
 {
@@ -33,7 +29,6 @@ public class TokenService : DatabaseActions, IToken
 
     public User SignIn(User user)
     {
-
         return user;
     }
 

@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 
 [ServiceContract]
@@ -20,7 +21,7 @@ public interface IAssignment
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api")
     ]
-    void AddAssignment(Assignment assignment);
+    Assignment AddAssignment(Assignment assignment);
 
     [OperationContract]
     [WebInvoke(
@@ -40,5 +41,13 @@ public interface IAssignment
     ]
     void UpdateAssignment(Assignment assignment);
 
+    [OperationContract]
+    [WebInvoke(
+         Method = "GET",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api")
+    ]
+    List<Assignment> GetAllAssignments();
 
 }

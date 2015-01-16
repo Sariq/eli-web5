@@ -48,7 +48,15 @@ public interface IMeeting
          BodyStyle = WebMessageBodyStyle.Bare,
          UriTemplate = "api")
     ]
-    List<Meeting> GetMeetingList();
+    List<Meeting> GetAllMeetings();
 
+    [OperationContract]
+    [WebInvoke(
+         Method = "POST",
+         ResponseFormat = WebMessageFormat.Json,
+         BodyStyle = WebMessageBodyStyle.Bare,
+         UriTemplate = "api/{id}")
+    ]
+    List<Assignment> GetAllAssignmentsOfMeeting(string meetingId);
 
 }
